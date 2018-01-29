@@ -29,14 +29,22 @@ pipeline {
       }
       environment {
         RMQ1_DOMAIN = "${env.rmq1Domain}"
-        ERLANG_COOKIE = "${env.rmqErlangCookie}"
-        RMQ_USER = "${env.rmqUser}"
-        RMQ_PASSWORD = "${env.rmqPassword}"
       }
       steps {
         script {
-          if (env.rmq1Domain && env.erlangCookie) {
-            sh "docker stack deploy -c stack.yml servicebus"
+          if (env.rmq1Domain) {
+            withCredentials([usernamePassword(
+              credentialsId: "rmq-auth",
+              usernameVariable: "RMQ_USER",
+              passwordVariable: "RMQ_PASSWORD"
+            )]) {
+              withCredentials([secretText(
+                credentialsId: "rmq-erlang-cookie",
+                variable: "ERLANG_COOKIE"
+              )]) {
+                sh "docker stack deploy -c stack.yml servicebus"
+              }
+            }
           } else {
             sh 'echo "ERROR: env.rmq1Domain and env.erlangCookie are required." && exit 1'
           }

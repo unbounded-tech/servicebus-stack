@@ -11,7 +11,7 @@ networks:
 services:
 
   rmq1:
-    image: rabbitmq:3.6-management
+    image: rabbitmq:3.6-management-alpine
     hostname: rmq1
     environment:
       ERLANG_COOKIE: ${ERLANG_COOKIE}
