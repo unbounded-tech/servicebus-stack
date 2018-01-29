@@ -5,12 +5,16 @@ before forking, create the following environment variables in Jenkins:
 ## `rmq1Domain`
 Example: `rmq1.yourdomain.com`
 
+---
+
 Also use credentials to create the following secret variables:
 
 Type "Secret Text"
 ## `erlangCookie`
 Random string used for clustering
 Example: `asldjfasdf123nasd24`
+
+---
 
 Type "Username/Password
 ## `rmqPassword`
