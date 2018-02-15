@@ -38,8 +38,6 @@ services:
         - com.df.distribute=true
         - com.df.port=15672
         - com.df.serviceDomain=${RMQ1_DOMAIN}
-        - com.df.letsencrypt.host=${RMQ1_DOMAIN}
-        - com.df.letsencrypt.email=${LETS_ENCRYPT_EMAIL}
 
   redis:
     image: redis:4.0-alpine
